@@ -33,6 +33,7 @@ function wag_speed(speed_change) {
         else {
             let happ_div = createDiv(`This is a happy pup, she can't wag any slower.`);
             happ_div.style('color', 'white');
+            happ_div.style('backgroundColor', 'black');
             setTimeout(function(){happ_div.remove()}, 3000);
         }
     }

@@ -27,7 +27,7 @@ let img_conf;
 
 // Instance of classifier for the sketch
 let sketch_classifier;
-let canvas;
+let canvas;  // TODO multiple canvases https://p5js.org/reference/#/p5/p5
 
 function preload() {
     // options: https://github.com/ml5js/ml5-library/blob/c3123cac0b1dfa0ed8e3e2588e8dea72ccd05aa8/src/ImageClassifier/index.js#L34
@@ -72,13 +72,15 @@ function gotResult(error, results) {
 
     rnn_load(img_class);
     startDrawing();
-    classify_sketch();
+    setTimeout(function(){classify_sketch()}, 5000);
   }
 }
 
 function classify_sketch() {
-    classifier = ml5.imageClassifier('DoodleNet');
-    classifier.classify(canvas, gotSketchResult);
+  sketch_classifier = ml5.imageClassifier('DoodleNet');
+  let doodle = canvas.get(windowWidth/2, 0, windowWidth/2, windowHeight/2);
+  // doodle.save('doodle', 'png');
+  sketch_classifier.classify(doodle, gotSketchResult);
 }
 
 function gotSketchResult(error, results) {
@@ -87,8 +89,7 @@ function gotSketchResult(error, results) {
     }
     console.log(results);
     // Show the first label and confidence
-    let conf_div = createDiv(`Confidence: ${nf(img_conf, 0, 2)}`);
-    let sketch_div = createDiv(`I am ${nf(100*results[0].confidence, 0, 0)}% confident that this is a \'${results[0].label}\'`);
+    let sketch_div = createDiv(`DoodleNet is ${nf(100*results[0].confidence, 0, 0)}% confident that this is a \'${results[0].label}\'`);
     sketch_div.position(windowWidth/2, windowHeight/2 + 50);
     sketch_div.style('color', 'white');
 }
@@ -115,7 +116,7 @@ function rnn_load(img_class) {
 // Reset the drawing
 function startDrawing() {
     x = 3 * windowWidth/4;
-    y = windowHeight/4;
+    y = windowHeight/6;
     rnn.reset();
     // Generate the first stroke path
     rnn.generate(gotStroke);

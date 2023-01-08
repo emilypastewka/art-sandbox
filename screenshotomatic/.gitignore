@@ -1,3 +1,4 @@
 credentials/*
 raw_screenshots/*
-
+.ipynb_checkpoints/*
+.DS_Store

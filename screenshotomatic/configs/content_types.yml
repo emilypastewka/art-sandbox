@@ -1,0 +1,36 @@
+athleisure:
+- lululemon
+- athleta
+- sweaty betty
+- alo
+book:
+- novel
+- read
+- reading
+- book
+- story
+decor: []
+drinks: []
+food: []
+makeup: []
+movie_or_show:
+- movie
+- film
+- show
+- series
+- netflix
+- hulu
+order_confirmation_or_ticket:
+- order
+- ticket
+- confirmation
+- confirmed
+restaurant: []
+shoes: []
+shopping: []
+spanish: []
+writing:
+- writing
+- narrative
+- plot
+- character
